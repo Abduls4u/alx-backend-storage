@@ -2,9 +2,13 @@
 -- checks if email is valid
 DELIMITER //
 CREATE TRIGGER IF NOT EXISTS is_valid_email
-AFTER UPDATE ON users
+BEFORE UPDATE ON users
 FOR EACH ROW
 BEGIN
-    DECLARE valid_email_reset boolean;
-    CASE( WHEN users.
-    )
+    IF NEW.email != OLD.email 
+    THEN
+        SET NEW.valid_email = 0;
+    END IF;
+END;
+//
+DELIMITER ;
